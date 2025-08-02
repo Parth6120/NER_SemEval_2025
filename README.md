@@ -142,4 +142,4 @@ pip install -r requirements.txt
 
 ---
 
-For any questions or suggestions, please open an issue or contact the maintainer.
+For any questions or suggestions, please open an issue.
