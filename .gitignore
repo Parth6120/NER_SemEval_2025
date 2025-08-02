@@ -10,6 +10,7 @@ __pycache__/
 Data/
 finetuned_placeholder_mt/
 entity_aware_mt/finetuned_placeholder_mt/
+E:\AISD\Term2\NLP\Project\NER_SemEval_2025\entity_aware_mt\finetuned_placeholder_mt/
 *.safetensors
 *.pt
 *.bin

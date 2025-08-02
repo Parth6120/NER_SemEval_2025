@@ -3,3 +3,8 @@ transformers
 scikit-learn
 tqdm
 numpy
+pandas
+jsonlines
+jupyter
+sentencepiece
+comet-ml # for evaluation
