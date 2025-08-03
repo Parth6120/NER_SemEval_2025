@@ -25,15 +25,30 @@ Named entities are critical for accurate translation, especially when dealing wi
 ## Directory Structure
 ```
 ├── entity_aware_mt
+│   ├── Entity_Aware_MT_Unified.ipynb        # Unified Jupyter notebook for full pipeline
 │   ├── src
 │   │   ├── baseline_translation.py
 │   │   ├── check_gpu.py
 │   │   ├── data_preparation.py
 │   │   ├── entity_aware_translation.py
+│   │   ├── eval.ipynb
 │   │   ├── finetune_placeholder_mt.py
 │   │   ├── postprocess_entities.py
 │   │   ├── predict_finetuned_mt.py
 │   │   └── translate_placeholders.py
+│   ├── data
+│   │   ├── prepared_data.csv
+│   │   ├── baseline_translations.csv
+│   │   ├── entity_placeholders.csv
+│   │   ├── entity_placeholders_translated.csv
+│   │   └── entity_aware_translations.csv
+│   └── finetuned_placeholder_mt/            # Fine-tuned MarianMT model and checkpoints
+├── Data/                                    # Raw and validation data (e.g., JSONL files)
+├── predictions.jsonl                        # Example predictions output
+├── requirements.txt
+├── README.md
+├── .gitignore
+```
 │   └── finetuned_placeholder_mt/  # (Ignored in git)
 ├── predictions.jsonl
 ├── requirements.txt
@@ -117,14 +132,31 @@ pip install -r requirements.txt
 ```
 
 ### 3. Prepare Data
-- Place your SemEval 2025 JSONL files in the appropriate directory.
-- Use `data_preparation.py` to preprocess the data.
+- Place your SemEval 2025 JSONL files in the appropriate directory (see notebook for expected structure).
 
-### 4. Train or Finetune Models
-- Use `finetune_placeholder_mt.py` for finetuning the MT model with entity placeholders.
+### 4. Run the Unified Notebook
+- Open `entity_aware_mt/Entity_Aware_MT_Unified.ipynb` in Jupyter Notebook or JupyterLab.
+- **Follow the notebook cells sequentially:**
+    - Environment check (GPU, dependencies)
+    - Data preparation (JSONL → DataFrame, entity extraction, Wikidata lookup)
+    - Baseline translation (English→French)
+    - Entity-aware pipeline (placeholder injection, translation, postprocessing)
+    - Fine-tuning MarianMT (optional, requires GPU)
+    - Prediction with fine-tuned model (optional)
+    - Evaluation (see notebook or `eval.ipynb`)
+- All major steps are runnable from the notebook. Inspect intermediate results and outputs as needed.
 
-### 5. Run Translation Pipeline
-- Use the scripts in `src/` as described above to process, translate, and evaluate your data.
+### 5. (Advanced) Use Modular Scripts
+- Scripts in `src/` (e.g., `baseline_translation.py`, `entity_aware_translation.py`, etc.) are provided for modular reference or batch processing, but **the recommended workflow is via the unified notebook**.
+
+### 6. GPU & Troubleshooting
+- GPU is recommended for translation and fine-tuning. The notebook checks for CUDA availability.
+- If you see warnings about `sacremoses`, install it with `pip install sacremoses`.
+- For issues with Wikidata fetching, check your internet connection and QID validity.
+- For large files/models, see `.gitignore` and GitHub LFS notes below.
+
+### 7. Evaluation
+- For evaluation, see the final section of the unified notebook or `eval.ipynb` for COMET-based scoring and analysis.
 
 ---
 
